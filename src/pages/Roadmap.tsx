@@ -113,10 +113,12 @@ const Roadmap = () => {
               {overallProgress}%
             </span>
           </div>
-          <Progress
-            value={overallProgress}
-            className="h-3 bg-primary-foreground/20"
-          />
+          <div className="relative h-3 w-full overflow-hidden rounded-full bg-primary-foreground/20">
+            <div
+              className="h-full bg-primary-foreground transition-all duration-500 ease-out rounded-full"
+              style={{ width: `${overallProgress}%` }}
+            />
+          </div>
           <p className="text-sm text-primary-foreground/80 mt-2">
             3 de 6 módulos concluídos
           </p>
