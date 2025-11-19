@@ -54,11 +54,9 @@ const AppLayout = () => {
             </Sheet>
 
             <Link to="/profile" className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-lg bg-gradient-primary" />
               <h1 className="text-xl font-bold text-foreground">Skill Swap</h1>
             </Link>
           </div>
-
         </div>
       </header>
 

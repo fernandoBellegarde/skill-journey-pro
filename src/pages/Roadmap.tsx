@@ -10,22 +10,72 @@ const Roadmap = () => {
   const overallProgress = 45;
 
   const modules = [
-    { title: "Introdução", icon: BookOpen, status: "completed" as const, position: { x: 15, y: 20 } },
-    { title: "Lógica de Programação", icon: Code, status: "completed" as const, position: { x: 30, y: 35 } },
-    { title: "Banco de Dados", icon: FileText, status: "current" as const, position: { x: 50, y: 30 } },
-    { title: "Python Básico", icon: Code, status: "locked" as const, position: { x: 65, y: 45 } },
-    { title: "Análise de Dados", icon: Video, status: "locked" as const, position: { x: 75, y: 25 } },
-    { title: "Visualização", icon: Trophy, status: "locked" as const, position: { x: 85, y: 40 } },
+    {
+      title: "Introdução",
+      icon: BookOpen,
+      status: "completed" as const,
+      position: { x: 10, y: 20 },
+    },
+    {
+      title: "Lógica de Programação",
+      icon: Code,
+      status: "completed" as const,
+      position: { x: 25, y: 40 },
+    },
+    {
+      title: "Banco de Dados",
+      icon: FileText,
+      status: "current" as const,
+      position: { x: 45, y: 35 },
+    },
+    {
+      title: "Python Básico",
+      icon: Code,
+      status: "locked" as const,
+      position: { x: 65, y: 50 },
+    },
+    {
+      title: "Análise de Dados",
+      icon: Video,
+      status: "locked" as const,
+      position: { x: 80, y: 30 },
+    },
+    {
+      title: "Visualização",
+      icon: Trophy,
+      status: "locked" as const,
+      position: { x: 90, y: 45 },
+    },
   ];
 
   const badges = [
-    { title: "Primeiro Passo", description: "Completou o primeiro módulo", earned: true, position: { x: 20, y: 60 } },
-    { title: "Persistente", description: "5 dias consecutivos", earned: true, position: { x: 40, y: 70 } },
-    { title: "Explorador", description: "Explorou 3 carreiras", earned: false, position: { x: 60, y: 65 } },
-    { title: "Mestre", description: "Completou uma jornada", earned: false, position: { x: 80, y: 70 } },
+    {
+      title: "Primeiro Passo",
+      description: "Completou o primeiro módulo",
+      earned: true,
+      position: { x: 15, y: 65 },
+    },
+    {
+      title: "Persistente",
+      description: "5 dias consecutivos",
+      earned: true,
+      position: { x: 35, y: 70 },
+    },
+    {
+      title: "Explorador",
+      description: "Explorou 3 carreiras",
+      earned: false,
+      position: { x: 60, y: 70 },
+    },
+    {
+      title: "Mestre",
+      description: "Completou uma jornada",
+      earned: false,
+      position: { x: 85, y: 65 },
+    },
   ];
 
-  const handleModuleClick = (module: typeof modules[0]) => {
+  const handleModuleClick = (module: (typeof modules)[0]) => {
     if (module.status === "current") {
       toast.info("Abrindo módulo", {
         description: `Carregando conteúdo de ${module.title}...`,
@@ -47,43 +97,101 @@ const Roadmap = () => {
             <AvatarFallback>JN</AvatarFallback>
           </Avatar>
           <div className="flex-1">
-            <h1 className="text-3xl font-bold text-foreground">Minha Jornada Gamificada</h1>
+            <h1 className="text-3xl font-bold text-foreground">
+              Minha Jornada Gamificada
+            </h1>
             <p className="text-muted-foreground">Carreira: Analista de Dados</p>
           </div>
         </div>
 
         <Card className="p-6 bg-gradient-primary">
           <div className="flex items-center justify-between mb-2">
-            <span className="font-semibold text-primary-foreground">Progresso Geral</span>
-            <span className="text-2xl font-bold text-primary-foreground">{overallProgress}%</span>
+            <span className="font-semibold text-primary-foreground">
+              Progresso Geral
+            </span>
+            <span className="text-2xl font-bold text-primary-foreground">
+              {overallProgress}%
+            </span>
           </div>
-          <Progress value={overallProgress} className="h-3 bg-primary-foreground/20" />
-          <p className="text-sm text-primary-foreground/80 mt-2">3 de 6 módulos concluídos</p>
+          <Progress
+            value={overallProgress}
+            className="h-3 bg-primary-foreground/20"
+          />
+          <p className="text-sm text-primary-foreground/80 mt-2">
+            3 de 6 módulos concluídos
+          </p>
         </Card>
       </div>
 
       {/* Roadmap Trail */}
-      <Card className="p-8 min-h-[600px] bg-muted/30 relative overflow-hidden">
+      <Card className="p-8 min-h-[600px] bg-gradient-to-br from-muted/20 to-muted/40 relative overflow-hidden border-muted/50">
         {/* Trail Path SVG */}
         <svg
           className="absolute inset-0 w-full h-full pointer-events-none"
           style={{ zIndex: 0 }}
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
         >
           <defs>
             <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="hsl(var(--secondary))" />
+              <stop offset="50%" stopColor="hsl(var(--accent))" />
+              <stop offset="100%" stopColor="hsl(var(--muted-foreground))" />
+            </linearGradient>
+            <linearGradient
+              id="completedGradient"
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="0%"
+            >
+              <stop offset="0%" stopColor="hsl(var(--secondary))" />
               <stop offset="100%" stopColor="hsl(var(--accent))" />
             </linearGradient>
           </defs>
+
+          {/* Caminho principal conectando todos os módulos */}
           <path
-            d="M 15 20 Q 22 28, 30 35 Q 40 32, 50 30"
+            d="M 10 20 Q 18 30, 25 40 Q 35 37, 45 35 Q 55 42, 65 50 Q 72 40, 80 30 Q 85 37, 90 45"
             fill="none"
             stroke="url(#pathGradient)"
-            strokeWidth="4"
-            strokeDasharray="8,4"
-            opacity="0.5"
-            transform="translate(0, 0) scale(1, 1)"
+            strokeWidth="3"
+            strokeDasharray="6,3"
+            opacity="0.6"
             vectorEffect="non-scaling-stroke"
+          />
+
+          {/* Caminho concluído (até o módulo atual) */}
+          <path
+            d="M 10 20 Q 18 30, 25 40 Q 35 37, 45 35"
+            fill="none"
+            stroke="url(#completedGradient)"
+            strokeWidth="4"
+            opacity="0.8"
+            vectorEffect="non-scaling-stroke"
+          />
+
+          {/* Pontos de conexão nos módulos concluídos */}
+          <circle
+            cx="10"
+            cy="20"
+            r="2"
+            fill="hsl(var(--secondary))"
+            opacity="0.8"
+          />
+          <circle
+            cx="25"
+            cy="40"
+            r="2"
+            fill="hsl(var(--secondary))"
+            opacity="0.8"
+          />
+          <circle
+            cx="45"
+            cy="35"
+            r="2"
+            fill="hsl(var(--accent))"
+            opacity="0.9"
           />
         </svg>
 
@@ -112,7 +220,9 @@ const Roadmap = () => {
 
         {/* Legend */}
         <div className="absolute bottom-4 right-4 bg-card border border-border rounded-lg p-4 shadow-card">
-          <h3 className="font-semibold text-sm mb-2 text-foreground">Legenda</h3>
+          <h3 className="font-semibold text-sm mb-2 text-foreground">
+            Legenda
+          </h3>
           <div className="space-y-2 text-xs">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded-full bg-secondary" />
